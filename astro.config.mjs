@@ -1,10 +1,7 @@
 // @ts-check
+// @ts-check
 import { defineConfig } from 'astro/config';
 
-export default defineConfig({
-  site: 'https://houssam-zouhri.github.io/project',
-  build: {
-    // Specify base URL for the assets
-    base: '/project/',
-  },
-});
+// https://astro.build/config
+export default defineConfig({});
+
