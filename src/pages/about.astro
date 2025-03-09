@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import { useState } from 'preact/hooks';
+
+const slides = [
+  {
+    title: "Education",
+    icon: "🎓",
+    content: /*html*/ `
+      <div class="slide-content">
+        <div class="slide-item">
+          <h5>PhD in Cyber Attack Detection</h3>
+		  <p>Mohamed VI Polytechnic University</p>
+          <p>Rabat, Morocco<br>2022-Present</p>
+        </div>
+        <div class="slide-item">
+          <h5>M.Sc. Data Science & Decision Support</h3>
+          <p>Mohamed VI Polytechnic University</p>
+		  <p>Benguerir, Morocco<br>09/2019– 07/2021</p>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: "Experience",
+    icon: "💼",
+    content: /*html*/ `
+      <div class="slide-content">
+        <div class="slide-item">
+          <h5>Data Engineer (Confidential)</h3>
+          <ul>
+            <li>Designed and optimized data pipelines for large-scale data processing.</li>
+            <li>Ensured data integrity and scalability for analytics and machine learning workflows.</li>
+          </ul>
+        </div>
+        <div class="slide-item">
+          <h5>Data Scientist Intern</h3>
+          <ul>
+            <li>Conducted data preprocessing and analysis for medical diagnostic datasets.</li>
+            <li>Implemented machine learning models to identify trends in patient health data.</li>
+			<li>Demonstrate the power of an unsupervised data analysis approach for data routinely collected from patients with
+ coronary heart disease. </li>
+			<li>Anticipate any need for chemistry to keep the patient stable.</li>
+          </ul>
+        </div>
+      </div>
+    `
+  },
+  
+{
+    title: "Publications",
+    icon: "📚",
+    content: /*html*/ `
+      <div class="slide-content scrollable">
+        <div class="publication-item">
+          <p>
+            <a href="https://www.researchgate.net/publication/374757813_Evaluating_the_impact_of_filter-based_feature_selection_in_intrusion_detection_systems" target="_blank" rel="noopener noreferrer">
+              Evaluating the Impact of Filter-Based Feature Selection in Intrusion Detection Systems
+            </a>
+          </h6>
+          <div class="publication-meta">
+            <span class="journal">International Journal of Information Security</span>
+            <span class="year-impact">2024 | Q2 | Impact Factor: 3.872</span>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <p>
+            <a href="https://www.researchgate.net/publication/380537774_A_Comparative_Assessment_of_Wrappers_and_Filters_for_Detecting_Cyber_Intrusions?_sg%5B0%5D=PPusmlXhbjGdpaQRCvNtSOZPTFwmPMxrF2LdcbuMuXh2BJCXpPULn5Yot8OF2X-_45Rg3dYo1tKo1jAUwUlEiArMhdQZqNL0wuQ8php3.jGVIpfV_AK8OFy4zbJ4ZjiSD_06kVTxty9JFmqHl7hpVsHED_2ee46PQ3DvJBwxX3kQNKsE4GGmFJSR5jKRuxw&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHJvZmlsZSIsInBvc2l0aW9uIjoicGFnZUNvbnRlbnQifX0" target="_blank" rel="noopener noreferrer">
+              A Comparative Assessment of Wrappers and Filters for Detecting Cyber Intrusions
+            </a>
+          </h5>
+          <div class="publication-meta">
+            <span class="conference">World Conference on Information Systems and Technologies</span>
+            <span class="year">2024</span>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <p>
+            <a href="https://www.researchgate.net/publication/384113253_Assessing_the_effectiveness_of_dimensionality_reduction_on_the_interpretability_of_opaque_machine_learning-based_attack_detection_systems" target="_blank" rel="noopener noreferrer">
+              Assessing the Effectiveness of Dimensionality Reduction on the Interpretability...
+            </a>
+          </h5>
+          <div class="publication-meta">
+        <span class="journal">Computers and Electrical Engineering</span>
+            <span class="year-impact">2024 | Q1 | Impact Factor: 4</span>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <p>
+            <a href="https://www.researchgate.net/publication/386368562_Assessing_the_Effectiveness_of_Synthetic_Data_Generation_for_Multi-Class_Cyber-Attacks_Detection_using_Generative_Adversarial_Networks" target="_blank" rel="noopener noreferrer">
+              Assessing the Effectiveness of Synthetic Data Generation for Multi-Class Cyber-Attacks
+            </a>
+          </h5>
+          <div class="publication-meta">
+            <span class="conference">World Conference on Complex Systems (WCCS)</span>
+            <span class="year">2024</span>
+          </div>
+        </div>
+      </div>
+    `
+}
+];
+
+
+---
+
+<BaseLayout title="Experience | Dr. Houssam ZOUHRI">
+	<div class="stack gap-20">
+		<main class="wrapper">
+		  <Hero
+			title="Professional Journey"
+			tagline="Navigate through my career milestones"
+		  >
+		  <img 
+		  alt="Houssam ZOUHRI"
+		  width="600"
+		  height="300"
+		  src="/assets/about.jpg"
+		  style="border-radius: 50%; object-fit: cover; display: block; margin: auto;"
+			/>
+			<div class="slideshow-controls">
+			  <button class="nav-button prev" aria-label="Previous slide">←</button>
+			  <div class="slide-indicators"></div>
+			  <button class="nav-button next" aria-label="Next slide">→</button>
+			</div>
+      </Hero>
+
+      <div class="slideshow-container">
+        {slides.map((slide, index) => (
+          <section 
+            class={`slide ${index === 0 ? 'active' : ''}`}
+            data-index={index}
+            aria-hidden={index !== 0}
+          >
+            <h2 class="section-title">{slide.icon} {slide.title}</h2>
+            <div class="content" set:html={slide.content} />
+          </section>
+        ))}
+      </div>
+    </main>
+    <ContactCTA />
+  </div>
+</BaseLayout>
+
+<style>
+  .slideshow-container {
+    position: relative;
+    min-height: 60vh;
+    margin: 1rem 0;
+  }
+
+  .slide {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+    background: var(--gray-600);
+    border-radius: 4rem;
+    padding: 2em;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  .slideshow-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .nav-button {
+    background: var(--gray-700);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .nav-button:hover {
+    background: var(--gray-600);
+  }
+
+  .slide-indicators {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .slide-indicators::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gray-600);
+  }
+
+  /* Keep previous slide styling from earlier version */
+  .slide-content { /* ... */ }
+  .grid-col-2 { /* ... */ }
+  .scrollable { /* ... */ }
+  .slide-item { /* ... */ }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    let currentIndex = 0;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentIndex);
+        slide.setAttribute('aria-hidden', index !== currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlides();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlides();
+    }
+
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+  });
+</script>
